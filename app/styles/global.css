@@ -1,3 +1,18 @@
+@font-face {
+  font-family: "云峰飞云体";
+  src: url("/fonts/YunFengFeiYunTi-2.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --font-body: -apple-system, "Segoe UI", Helvetica Neue, Helvetica,
+  Roboto, Arial, sans-serif, system-ui, "Apple Color Emoji",
+  "Segoe UI Emoji";
+  --font-display: var(--font-body);
+}
+
+
 *, *::after, *::before {
   box-sizing: border-box;
   margin: 0;
@@ -15,4 +30,12 @@ a {
 
 img {
   max-width: 100%;
+}
+
+body {
+  font-family: var(--font-display);
+  line-height: 1.5;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  min-height: calc(100vh - env(safe-area-inset-bottom));
 }

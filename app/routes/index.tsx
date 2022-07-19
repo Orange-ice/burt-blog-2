@@ -1,5 +1,5 @@
 export default function Index() {
   return (
-    <h1>Welcome to Burt Blog.</h1>
+    <h1 style={{fontFamily: '云峰飞云体'}}>Welcome to Burt Blog.</h1>
   );
 }
