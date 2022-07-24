@@ -7,7 +7,7 @@ async function seed() {
     data: {
       name: 'Burt',
       email: '2902978956@qq.com',
-      passwordHash: '$2b$10$K7L1OJ45/4Y2nIvhRVpCe.FSmhDdWoXehVzJptJ/op0lSsvqNu/1u',
+      passwordHash: '$2b$10$K7L1OJ45/4Y2nIvhRVpCe.FSmhDdWoXehVzJptJ/op0lSsvqNu/1u', //twixrox
     }
   });
 }
