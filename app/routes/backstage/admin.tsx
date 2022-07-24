@@ -1,28 +1,38 @@
 /**
  * @description 后台主页
  * */
-import {Link, Outlet} from '@remix-run/react';
+import {Link, Outlet, useLoaderData} from '@remix-run/react';
 import type {LinksFunction, LoaderFunction} from '@remix-run/node';
-import {requireUserId} from '~/utils/session.server';
 import adminStyleUrl from '~/styles/backstage/admin.css';
+import {getUser} from '~/utils/session.server';
+import {json} from '@remix-run/node';
+
+type LoaderData = {
+  user: Awaited<ReturnType<typeof getUser>>
+}
 
 export const links: LinksFunction = () => [
   {rel: 'stylesheet', href: adminStyleUrl},
 ];
 
 export const loader: LoaderFunction = async ({request}) => {
-  const userId = await requireUserId(request);
-  console.log(userId);
-  return null;
+  const user = await getUser(request);
+  const data: LoaderData = {user};
+  return json(data);
 };
 
 export default function BackstageAdmin() {
+  const data = useLoaderData<LoaderData>();
   return (
     <div className="container">
       <header>
         <h1>Burt Blog 后台系统</h1>
-        <span>welcome, username!</span>
-        <button>退出</button>
+        <span>welcome, {data.user?.name}!</span>
+        <form action="/backstage/logout" method="post">
+          <button type="submit">
+            退出
+          </button>
+        </form>
       </header>
       <div className="content">
         <aside>

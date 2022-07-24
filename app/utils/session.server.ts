@@ -81,3 +81,29 @@ export async function requireUserId(request: Request, redirectTo: string = new U
   }
   return userId;
 }
+
+/**
+ * @description 获取用户信息
+ * */
+export async function getUser(request: Request) {
+  const userId = await requireUserId(request);
+
+  try {
+    const user = await db.user.findUnique({
+      where: {id: userId},
+      select: {id: true, name: true},
+    });
+    return user;
+  } catch {
+    throw logout(request);
+  }
+}
+
+export async function logout(request: Request) {
+  const session = await getUserSession(request);
+  return redirect('/backstage/login', {
+    headers: {
+      'Set-Cookie': await storage.destroySession(session),
+    },
+  });
+}
