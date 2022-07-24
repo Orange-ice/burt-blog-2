@@ -10,6 +10,10 @@
   Roboto, Arial, sans-serif, system-ui, "Apple Color Emoji",
   "Segoe UI Emoji";
   --font-display: var(--font-body);
+  --primary-color: #FFBA9D;
+  --primary-color-dark: #FF9A7D;
+  --dark-color: #474747;
+  --darken-color: #2b2b2b;
 }
 
 

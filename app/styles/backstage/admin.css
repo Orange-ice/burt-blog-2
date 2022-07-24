@@ -21,17 +21,6 @@
 
 .container header button {
   margin-left: 16px;
-
-  cursor: pointer;
-  border: none;
-  padding: 4px 16px;
-  background: #ffece8;
-  color: #f53f3f;
-  border-radius: 2px;
-}
-
-.container header button:hover {
-  background: #fdcdc5;
 }
 
 .content {

@@ -6,12 +6,14 @@ import type {LinksFunction, LoaderFunction} from '@remix-run/node';
 import adminStyleUrl from '~/styles/backstage/admin.css';
 import {getUser} from '~/utils/session.server';
 import {json} from '@remix-run/node';
+import {Button, links as buttonLinks} from '~/components/button';
 
 type LoaderData = {
   user: Awaited<ReturnType<typeof getUser>>
 }
 
 export const links: LinksFunction = () => [
+  ...buttonLinks(),
   {rel: 'stylesheet', href: adminStyleUrl},
 ];
 
@@ -29,9 +31,7 @@ export default function BackstageAdmin() {
         <h1>Burt Blog 后台系统</h1>
         <span>welcome, {data.user?.name}!</span>
         <form action="/backstage/logout" method="post">
-          <button type="submit">
-            退出
-          </button>
+          <Button type="submit">退出</Button>
         </form>
       </header>
       <div className="content">

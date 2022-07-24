@@ -1,0 +1,24 @@
+.button {
+  height: 44px;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 4px;
+  color: #ffffff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.button.primary {
+  background: var(--primary-color);
+}
+.button.primary:hover {
+  background: var(--primary-color-dark);
+}
+
+.button.dark {
+  background: var(--dark-color);
+}
+.button.dark:hover {
+  background: var(--darken-color);
+}
+
