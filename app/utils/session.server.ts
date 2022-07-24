@@ -53,3 +53,31 @@ export async function createUserSession(userId: string, redirectTo: string) {
     }
   });
 }
+
+function getUserSession(request: Request) {
+  return storage.getSession(request.headers.get('Cookie'));
+}
+
+/**
+ * @description 通过用户 session 获取用户 id
+ * */
+export async function getUserId(request: Request) {
+  const session = await getUserSession(request);
+  const userId = session.get('userId');
+  if (!userId || typeof userId !== 'string') return null;
+  return userId;
+}
+
+/**
+ * @description 获取用户 id，如未登录，则跳转到登录页面
+ * */
+export async function requireUserId(request: Request, redirectTo: string = new URL(request.url).pathname) {
+  const userId = await getUserId(request);
+  if (!userId) {
+    const searchParams = new URLSearchParams([
+      ['redirectTo', redirectTo],
+    ]);
+    throw redirect(`/backstage/login?${searchParams}`);
+  }
+  return userId;
+}
