@@ -6,7 +6,7 @@ import loginStyleUrl from '~/styles/backstage/login.css';
 import {json} from '@remix-run/node';
 import {db} from '~/utils/db.server';
 import {useActionData, useSearchParams} from '@remix-run/react';
-import {createUserSession, login} from '~/utils/session.server';
+import {createUserSession, login, register} from '~/utils/session.server';
 
 type ActionData = {
   formError?: string;
@@ -43,8 +43,11 @@ export const action: ActionFunction = async ({request}) => {
       if (userExists) {
         return badRequest({formError: 'User already exists'});
       }
-      return null;
-    // create user
+      const newUser = await register({name, password});
+      if (!newUser) {
+        return badRequest({formError: 'Register failed'});
+      }
+      return createUserSession(newUser.id, redirectTo);
     default:
       return badRequest({formError: 'Login type invalid'});
   }
